@@ -1,27 +1,194 @@
+/* src/app/globals.css */
+
+/* Import Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Base Styles and Theme Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-color: #e3dff2;
+  --text-color: #000;
+  --border-color: #000;
+  --button-bg-color: #bd52eb;
+  --button-text-color: #fff;
+  --hover-bg-color: #a81be4;
+  --focus-ring-color: rgba(168, 27, 228, 0.6);
+  --grid-color: rgba(255, 255, 255, 0.1);
+  --dot-color: rgba(255, 255, 255, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark Theme Variables */
+[data-theme='dark'] {
+  --bg-color: #1d1f27;
+  --text-color: #eeefe9;
+  --border-color: #000;
+  --button-bg-color: #bd52eb;
+  --button-text-color: #fff;
+  --hover-bg-color: #8e24aa;
+  --focus-ring-color: rgba(142, 36, 170, 0.6);
+  --grid-color: rgba(255, 255, 255, 0.03);
+  --dot-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Apply Base Styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply font-mono leading-relaxed transition-colors duration-300;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Dot Grid Background */
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 20px);
+  grid-template-rows: repeat(auto-fill, 20px);
+  gap: 20px;
+}
+
+.dot {
+  width: 1px;
+  height: 1px;
+  background-color: var(--dot-color);
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Navigation Styles */
+nav h1 a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+#nav-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  color: var(--text-color);
+}
+
+.nav-icon {
+  font-size: 28px;
+}
+
+.nav-container {
+  @apply flex items-center justify-between flex-wrap;
+}
+
+/* Navigation Links */
+.nav-links ul {
+  @apply list-none flex flex-col md:flex-row md:items-center md:space-x-4 md:mt-0;
+}
+
+.nav-links ul li {
+  @apply my-2 md:my-0;
+}
+
+/* Button Styles */
+.btn {
+  @apply inline-block text-buttonTextColor bg-buttonBgColor border-2 border-borderColor px-4 py-2 rounded font-medium text-base shadow-custom transition-transform duration-100 focus:outline-none focus:ring-2;
+}
+
+.btn:hover {
+  background-color: var(--hover-bg-color);
+  transform: translate(2px, 2px);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 2px var(--focus-ring-color);
+}
+
+/* Image Card Styles */
+.image-card {
+  width: 150px;
+  height: 150px;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
+  border: 4px solid var(--border-color);
+  border-radius: 50%;
+  box-shadow: 4px 4px 0px 0px #000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 20px auto;
+}
+
+.image-card:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 6px 6px 0px 0px #000;
+}
+
+/* Utility Classes */
+.shadow-custom {
+  box-shadow: 2px 2px 0px 0px #000;
+}
+
+.shadow-custom-hover:hover {
+  box-shadow: 6px 6px 0px 0px #000;
+}
+
+.shadow-custom-negative {
+  box-shadow: 2px -2px 0px 0px #000;
+}
+
+/* Accessibility Enhancements */
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--focus-ring-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+  }
+
+  .nav-links.block {
+    display: block;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .nav-links ul li {
+    margin: 12px 20px;
+  }
+
+  .nav-links a.btn,
+  .nav-links button#theme-toggle.btn {
+    width: auto;
+    text-align: right;
+  }
+
+  nav h1 a {
+    font-size: 28px;
+  }
+
+  .image-card {
+    width: 120px;
+    height: 120px;
+    font-size: 80px;
   }
 }
