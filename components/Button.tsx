@@ -1,15 +1,49 @@
-import { cn } from '../lib/utils';
-import React from 'react';
+// components/Button.tsx
+'use client';
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+import React from 'react';
+import Link from 'next/link';
+
+interface ButtonProps {
+  href?: string;
+  onClick?: () => void;
+  children: React.ReactNode;
+  ariaLabel?: string;
   className?: string;
+  target?: string;
+  rel?: string;
+}
+
+const Button: React.FC<ButtonProps> = ({
+  href,
+  onClick,
+  children,
+  ariaLabel,
+  className = '',
+  target,
+  rel,
+}) => {
+  const classes = `btn ${className}`;
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        aria-label={ariaLabel}
+        className={classes}
+        target={target}
+        rel={rel}
+      >
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <button className={classes} onClick={onClick} aria-label={ariaLabel}>
+      {children}
+    </button>
+  );
 };
 
-export function Button({ className, ...props }: ButtonProps) {
-  return (
-    <button
-      className={cn('px-4 py-2 text-white bg-black rounded', className)}
-      {...props}
-    />
-  );
-}
+export default Button;
