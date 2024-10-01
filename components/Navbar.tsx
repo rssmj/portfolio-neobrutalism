@@ -4,9 +4,16 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ThemeToggle from '../components/ThemeToggle';
+import { usePathname } from 'next/navigation';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close menu when pathname changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   // Effect to toggle 'overflow-hidden' class on body
   useEffect(() => {
@@ -18,11 +25,15 @@ const Navbar: React.FC = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className='bg-bgColor border-b-4 border-borderColor shadow-custom sticky top-0 z-50'>
+    <nav className='bg-background border-b-4 border-borderColor shadow-custom sticky top-0 z-50'>
       <div className='nav-container flex items-center justify-between px-5 py-3 flex-wrap'>
         {/* Site Title */}
         <h1 className='text-2xl font-bold'>
-          <Link href='/' className='text-textColor no-underline'>
+          <Link
+            href='/'
+            className='text-textColor no-underline'
+            onClick={() => setIsMenuOpen(false)}
+          >
             Dev Name
           </Link>
         </h1>

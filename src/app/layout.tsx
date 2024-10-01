@@ -27,7 +27,7 @@ export default function RootLayout({
       <body>
         <DotGridBackground />
         <Navbar />
-        <main className='max-w-3xl mx-auto px-4 py-8'>{children}</main>
+        <main className='pt-16 max-w-3xl mx-auto px-4 py-8'>{children}</main>
         <Footer />
       </body>
     </html>

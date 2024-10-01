@@ -10,6 +10,8 @@ interface ButtonProps {
   children: React.ReactNode;
   ariaLabel?: string;
   className?: string;
+  target?: string;
+  rel?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,12 +20,20 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ariaLabel,
   className = '',
+  target,
+  rel,
 }) => {
   const classes = `btn ${className}`;
 
   if (href) {
     return (
-      <Link href={href} aria-label={ariaLabel} className={classes}>
+      <Link
+        href={href}
+        aria-label={ariaLabel}
+        className={classes}
+        target={target}
+        rel={rel}
+      >
         {children}
       </Link>
     );

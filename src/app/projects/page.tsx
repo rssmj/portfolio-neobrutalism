@@ -7,16 +7,25 @@ const projects = [
     title: 'Project One',
     description: 'Short description of Project One.',
     link: 'https://github.com/yourusername/project1',
+    deployedLink: 'https://projectone.example.com',
   },
   {
     title: 'Project Two',
     description: 'Short description of Project Two.',
     link: 'https://github.com/yourusername/project2',
+    deployedLink: 'https://projecttwo.example.com',
   },
   {
     title: 'Project Three',
     description: 'Short description of Project Three.',
     link: 'https://github.com/yourusername/project3',
+    deployedLink: 'https://projectthree.example.com',
+  },
+  {
+    title: 'Project Four',
+    description: 'Short description of Project Four.',
+    link: 'https://github.com/yourusername/project4',
+    deployedLink: 'https://projectfour.example.com',
   },
 ];
 
